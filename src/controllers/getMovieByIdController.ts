@@ -20,6 +20,6 @@ export const getMovieByIdController = async (req: FastifyRequest, res: FastifyRe
 
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ message: 'Erro interno do servidor' });
+        throw new Error('Erro ao buscar filme');
     }
 }

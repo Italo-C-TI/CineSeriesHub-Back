@@ -1,10 +1,11 @@
 import axios from 'axios';
 import {searchMoviesUrl} from '../urls';
 import { NotFoundMOVIE_DB_API_KEYError } from '../../errors';
+import { env } from '../../env';
 
-export const getMoviesBysearchMovies = async (query: string, page?: number) => {
+export const getMoviesBySearch = async (query: string, page?: number) => {
   try {
-    const apiKey = process.env.MOVIE_DB_API_KEY;
+    const apiKey = env.MOVIE_DB_API_KEY;
     if (!apiKey) {
         throw new NotFoundMOVIE_DB_API_KEYError();
     }
@@ -19,7 +20,7 @@ export const getMoviesBysearchMovies = async (query: string, page?: number) => {
 
     return response.data;
   } catch (error) {
-    throw new Error('Erro ao buscar filmes: ' + error.message);
+    throw new Error('Erro ao pesquisar filmes');
   }
 }
 
