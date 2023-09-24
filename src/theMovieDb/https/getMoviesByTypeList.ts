@@ -1,15 +1,13 @@
 import axios from 'axios';
 import {baseMoviesUrl} from '../urls';
-import { NotFoundMOVIE_DB_API_KEYError } from '../../errors';
-import { ListMoviesCategoryType } from '../../typesAndEnums/TypeListMovie';
+import { NotFoundMOVIE_DB_API_KEYError, UnexpectedError } from '../../errors';
+import { ListMoviesCategoryType } from '../../types&enums/TypeListMovie';
 import { env } from '../../env';
 
 
 export const getMoviesByTypeList = async (typeListMovies: ListMoviesCategoryType, page?: number) => {
   try {
     const apiKey = env.MOVIE_DB_API_KEY;
-    console.log(apiKey);
-    console.log(env);
     if (!apiKey) {
          throw new NotFoundMOVIE_DB_API_KEYError();
     }
@@ -22,11 +20,10 @@ export const getMoviesByTypeList = async (typeListMovies: ListMoviesCategoryType
 
     const response = await axios.get(`${baseMoviesUrl}${typeListMovies}`, { params });
 
-
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error('Erro ao buscar lista de filmes');
+    throw new UnexpectedError();
   }
 }
 

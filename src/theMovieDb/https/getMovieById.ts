@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {baseMoviesUrl} from '../urls';
-import { NotFoundMOVIE_DB_API_KEYError } from '../../errors';
+import { NotFoundMOVIE_DB_API_KEYError, UnexpectedError } from '../../errors';
 import { env } from '../../env';
 
 export const getMovieById = async (movie_id: string, page?: number) => {
@@ -20,7 +20,8 @@ export const getMovieById = async (movie_id: string, page?: number) => {
 
     return response.data;
   } catch (error) {
-    throw new Error('Erro ao buscar filme');
+    console.log(error);
+    throw new UnexpectedError();
   }
 }
 
