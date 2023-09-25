@@ -14,7 +14,7 @@ export const getMoviesByTypeList = async (typeListMovies: ListMoviesCategoryType
     const params = {
       include_adult: false,
       language: 'pt-BR',
-      page: page || 1,
+      page: page,
       api_key: apiKey,
     };
 
