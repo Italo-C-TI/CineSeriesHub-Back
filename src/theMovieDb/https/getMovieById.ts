@@ -3,7 +3,7 @@ import {baseMoviesUrl} from '../urls';
 import { NotFoundMOVIE_DB_API_KEYError, UnexpectedError } from '../../errors';
 import { env } from '../../env';
 
-export const getMovieById = async (movie_id: string, page?: number) => {
+export const getMovieById = async (movie_id: string) => {
   try {
     const apiKey = env.MOVIE_DB_API_KEY;
     if (!apiKey) {
@@ -12,11 +12,9 @@ export const getMovieById = async (movie_id: string, page?: number) => {
     const params = {
       include_adult: false,
       language: 'pt-BR',
-      movie_id,
-      page: page || 1,
       api_key: apiKey,
     };
-    const response = await axios.get(baseMoviesUrl, { params });
+    const response = await axios.get(`${baseMoviesUrl}${movie_id}`, { params });
 
     return response.data;
   } catch (error) {

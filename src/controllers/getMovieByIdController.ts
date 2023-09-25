@@ -4,13 +4,13 @@ import { FastifyReply, FastifyRequest } from "fastify";
 
 export const getMovieByIdController = async (req: FastifyRequest, res: FastifyReply) => {
     const ParamsSchema = typingRules.object({
-        id: typingRules.string(),
+        movie_id: typingRules.string(),
     })
 
-    const { id } = ParamsSchema.parse(req.params);
+    const { movie_id } = ParamsSchema.parse(req.params);
 
     try {
-        const movie = await getMovieById(id);
+        const movie = await getMovieById(movie_id);
 
         if (movie) {
             return res.status(200).send({ movie });
