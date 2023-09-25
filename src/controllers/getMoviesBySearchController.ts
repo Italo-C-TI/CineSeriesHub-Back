@@ -5,13 +5,14 @@ import { FastifyReply, FastifyRequest } from "fastify";
 export const getMoviesBySearchController = async (req: FastifyRequest, res: FastifyReply) => {
     const QuerySchema = typingRules.object({
         search: typingRules.string(),
+        page: typingRules.string().optional(),
     })
 
-    const { search } = QuerySchema.parse(req.query);
+    const { search, page } = QuerySchema.parse(req.query);
 
 
     try {
-        const movies = await getMoviesBySearch(search);
+        const movies = await getMoviesBySearch(search, Number(page));
  
 
         return res.status(200).send({ movies })
